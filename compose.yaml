@@ -6,11 +6,11 @@ services:
       dockerfile: nginx/Dockerfile
     ports:
       - 80:80
-  edb-web-app:
-    container_name: edb-web-app
+  edb-server:
+    container_name: edb-server
     build: 
       context: .
-      dockerfile: edb-web-app/Dockerfile
+      dockerfile: edb-server/Dockerfile
     # https://vsupalov.com/docker-arg-env-variable-guide/
     env_file: 
       .env
