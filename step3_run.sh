@@ -2,5 +2,5 @@
 #docker-compose down
 #docker image rm docker-rust-edb-api-web
 #docker-compose up -d
-./step3_rebuild_server.sh
-./step4_rebuild_nginx.sh
+./step1_rebuild_server.sh
+./step2_rebuild_nginx.sh
