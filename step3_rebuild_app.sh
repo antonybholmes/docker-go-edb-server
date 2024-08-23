@@ -5,4 +5,4 @@ then
 fi
 
 # rebuild in background then replace once built
-docker-compose up -d --no-deps --build edb-api
+docker-compose up -d --no-deps --build edb-web-app

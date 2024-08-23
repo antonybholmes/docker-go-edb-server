@@ -3,14 +3,14 @@ services:
     container_name: nginx
     build: 
       context: .
-      dockerfile: docker/nginx/Dockerfile
+      dockerfile: nginx/Dockerfile
     ports:
       - 80:80
-  edb-api:
-    container_name: go-edb-api
+  edb-web-app:
+    container_name: edb-web-app
     build: 
       context: .
-      dockerfile: docker/api/Dockerfile
+      dockerfile: edb-web-app/Dockerfile
     # https://vsupalov.com/docker-arg-env-variable-guide/
     env_file: 
       .env

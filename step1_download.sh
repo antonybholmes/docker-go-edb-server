@@ -10,6 +10,7 @@ git clone git@github.com:antonybholmes/go-geneconv.git
 git clone git@github.com:antonybholmes/go-pathway.git
 git clone git@github.com:antonybholmes/go-microarray.git
 git clone git@github.com:antonybholmes/go-motiftogene.git
+git clone git@github.com:antonybholmes/go-gex.git
 
 pwd=`pwd`
 for d in `find . -maxdepth 1 -type d`
