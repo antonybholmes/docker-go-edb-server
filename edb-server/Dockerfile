@@ -29,7 +29,6 @@ RUN git clone https://github.com/antonybholmes//go-edb-server.git && \
 	git clone https://github.com/antonybholmes//go-mutations.git && \
 	git clone https://github.com/antonybholmes//go-geneconv.git && \
 	git clone https://github.com/antonybholmes//go-pathway.git && \
-	git clone https://github.com/antonybholmes//go-microarray.git && \
 	git clone https://github.com/antonybholmes//go-motiftogene.git && \
 	git clone https://github.com/antonybholmes//go-gex.git
 
