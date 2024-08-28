@@ -6,4 +6,4 @@ fi
 
 docker-compose build --no-cache edb-server
 # rebuild in background then replace once built
-docker-compose up -d --no-deps --build edb-server
+docker-compose up -d --no-deps --force-recreate edb-server
