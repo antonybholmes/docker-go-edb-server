@@ -53,6 +53,7 @@ COPY --from=build-stage /go-edb-server/edb-server edb-server
 
 # aux files needed by app
 COPY --from=build-stage /go-edb-server/templates/ /templates
+COPY --from=build-stage /go-edb-server/version.env /
 COPY .env /
 
 # copy keys for signing jwts etc
