@@ -1,6 +1,9 @@
 services:
   nginx:
     container_name: nginx
+    profiles:
+      - prod
+      - dev
     build: 
       context: .
       dockerfile: nginx/Dockerfile
@@ -8,6 +11,9 @@ services:
       - 80:80
   edb-server:
     container_name: edb-server
+    profiles:
+      - prod
+      - dev
     build: 
       context: .
       dockerfile: edb-server/Dockerfile
@@ -19,3 +25,16 @@ services:
     volumes:
       - ../data:/data
       - ../logs:/logs
+  redis:
+    container_name: redis
+    profiles:
+      - prod
+      - dev
+      - redis
+    build: 
+      context: .
+      dockerfile: redis/Dockerfile
+    env_file:
+      .env
+    ports:
+      - 6379:6379
