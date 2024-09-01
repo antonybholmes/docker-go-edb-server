@@ -20,7 +20,6 @@ WORKDIR /
 
 # get the repositories we need
 RUN git clone https://github.com/antonybholmes//go-edb-server.git && \
-    git clone https://github.com/antonybholmes//go-edb-server-mailer.git && \
 	git clone https://github.com/antonybholmes//go-dna.git && \
 	git clone https://github.com/antonybholmes//go-genes.git && \
 	git clone https://github.com/antonybholmes//go-auth.git && \

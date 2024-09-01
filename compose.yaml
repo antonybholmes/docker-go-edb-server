@@ -1,30 +1,4 @@
 services:
-  nginx:
-    container_name: nginx
-    profiles:
-      - prod
-      - dev
-    build: 
-      context: .
-      dockerfile: nginx/Dockerfile
-    ports:
-      - 80:80
-  edb-server:
-    container_name: edb-server
-    profiles:
-      - prod
-      - dev
-    build: 
-      context: .
-      dockerfile: edb-server/Dockerfile
-    # https://vsupalov.com/docker-arg-env-variable-guide/
-    env_file: 
-      .env
-    ports:
-      - 8080:8080
-    volumes:
-      - ../data:/data
-      - ../logs:/logs
   redis:
     container_name: redis
     profiles:
@@ -49,3 +23,30 @@ services:
       dockerfile: edb-server-mailer/Dockerfile
     env_file: 
       .env
+  edb-server:
+    container_name: edb-server
+    profiles:
+      - prod
+      - dev
+    build: 
+      context: .
+      dockerfile: edb-server/Dockerfile
+    # https://vsupalov.com/docker-arg-env-variable-guide/
+    env_file: 
+      .env
+    ports:
+      - 8080:8080
+    volumes:
+      - ../data:/data
+      - ../logs:/logs
+  nginx:
+    container_name: nginx
+    profiles:
+      - prod
+      - dev
+    build: 
+      context: .
+      dockerfile: nginx/Dockerfile
+    ports:
+      - 80:80
+
