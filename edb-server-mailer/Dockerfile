@@ -30,9 +30,9 @@ COPY --from=build-stage /etc/ssl/certs/ca-certificates.crt /etc/ssl/certs/
 COPY --from=build-stage /go-edb-server-mailer/edb-server-mailer edb-server-mailer
 
 # aux files needed by app
-COPY --from=build-stage /go-edb-mailer/templates/ /templates
-COPY --from=build-stage /go-edb-mailer/consts.env /
-COPY --from=build-stage /go-edb-mailer/version.env /
+COPY --from=build-stage /go-edb-server-mailer/templates/ /templates
+COPY --from=build-stage /go-edb-server-mailer/consts.env /
+COPY --from=build-stage /go-edb-server-mailer/version.env /
 COPY .env /
 
 # copy keys for signing jwts etc
