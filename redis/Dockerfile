@@ -1,7 +1,5 @@
 FROM redis:alpine
 
-# modify nginx behaviour
-# COPY nginx/nginx.conf /etc/nginx/nginx.conf
-
- 
+COPY redis/redis.conf /usr/local/etc/redis/redis.conf
+CMD [ "redis-server", "/usr/local/etc/redis/redis.conf" ]
  
