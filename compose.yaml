@@ -38,3 +38,14 @@ services:
       .env
     ports:
       - 6379:6379
+  edb-server-mailer:
+    container_name: edb-server-mailer
+    profiles:
+      - mailer
+      - prod
+      - dev
+    build: 
+      context: .
+      dockerfile: edb-server-mailer/Dockerfile
+    env_file: 
+      .env
