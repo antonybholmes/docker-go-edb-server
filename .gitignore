@@ -43,3 +43,5 @@ go-microarray
 go-sys
 
 .env
+
+src

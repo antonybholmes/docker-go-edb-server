@@ -5,33 +5,32 @@ FROM golang AS build-stage
 
 WORKDIR /
 
-# ADD go-edb-api/ go-edb-api/
-# ADD go-dna/ go-dna/
-# ADD go-genes/ go-genes/
-# ADD go-auth/ go-auth/
-# ADD go-basemath/ go-basemath/
-# ADD go-mailer/ go-mailer/
-# ADD go-sys/ go-sys/
-# ADD go-geneconv/ go-geneconv/
-# ADD go-pathway/ go-pathway/
-# ADD go-mutations/ go-mutations/
-# ADD go-microarray/ go-microarray/
-# ADD go-motiftogene/ go-motiftogene/
+ADD src/go-edb-server/ go-edb-server/
+ADD src/go-dna/ go-dna/
+ADD src/go-genes/ go-genes/
+ADD src/go-auth/ go-auth/
+ADD src/go-basemath/ go-basemath/
+ADD src/go-mailer/ go-mailer/
+ADD src/go-sys/ go-sys/
+ADD src/go-mutations/ go-mutations/
+ADD src/go-geneconv/ go-geneconv/
+ADD src/go-pathway/ go-pathway/
+ADD src/go-motiftogene/ go-motiftogene/
+ADD src/go-gex/ go-gex/
 
 # get the repositories we need
-RUN git clone https://github.com/antonybholmes//go-edb-server.git && \
-	git clone https://github.com/antonybholmes//go-dna.git && \
-	git clone https://github.com/antonybholmes//go-genes.git && \
-	git clone https://github.com/antonybholmes//go-auth.git && \
-	git clone https://github.com/antonybholmes//go-basemath.git && \
-	git clone https://github.com/antonybholmes//go-sys.git && \
-	git clone https://github.com/antonybholmes//go-mailer.git && \
-	git clone https://github.com/antonybholmes//go-mutations.git && \
-	git clone https://github.com/antonybholmes//go-geneconv.git && \
-	git clone https://github.com/antonybholmes//go-pathway.git && \
-	git clone https://github.com/antonybholmes//go-motiftogene.git && \
-	git clone https://github.com/antonybholmes//go-gex.git
-
+#RUN git clone https://github.com/antonybholmes//go-edb-server.git && \
+#	git clone https://github.com/antonybholmes//go-dna.git && \
+#	git clone https://github.com/antonybholmes//go-genes.git && \
+#	git clone https://github.com/antonybholmes//go-auth.git && \
+#	git clone https://github.com/antonybholmes//go-basemath.git && \
+#	git clone https://github.com/antonybholmes//go-sys.git && \
+#	git clone https://github.com/antonybholmes//go-mailer.git && \
+#	git clone https://github.com/antonybholmes//go-mutations.git && \
+#	git clone https://github.com/antonybholmes//go-geneconv.git && \
+#	git clone https://github.com/antonybholmes//go-pathway.git && \
+#	git clone https://github.com/antonybholmes//go-motiftogene.git && \
+#	git clone https://github.com/antonybholmes//go-gex.git
 
 WORKDIR /go-edb-server
 

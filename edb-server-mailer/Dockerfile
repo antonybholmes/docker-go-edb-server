@@ -5,11 +5,16 @@ FROM golang AS build-stage
 
 WORKDIR /
 
+ADD src/go-edb-server-mailer/ go-edb-server-mailer/
+ADD src/go-auth/ go-auth/
+ADD src/go-sys/ go-sys/
+ADD src/go-mailer/ go-mailer/
+
 # get the repositories we need
-RUN git clone https://github.com/antonybholmes//go-edb-server-mailer.git && \
-	git clone https://github.com/antonybholmes//go-auth.git && \
-	git clone https://github.com/antonybholmes//go-sys.git && \
-	git clone https://github.com/antonybholmes//go-mailer.git
+#RUN git clone https://github.com/antonybholmes//go-edb-server-mailer.git && \
+#	git clone https://github.com/antonybholmes//go-auth.git && \
+#	git clone https://github.com/antonybholmes//go-sys.git && \
+#	git clone https://github.com/antonybholmes//go-mailer.git
 
 WORKDIR /go-edb-server-mailer
 

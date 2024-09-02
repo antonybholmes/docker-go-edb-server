@@ -1,3 +1,4 @@
+./step1_pull.sh
 
 #docker-compose down
 #docker image rm docker-rust-edb-api-web
@@ -10,15 +11,13 @@ then
 fi
 
 # start redis
-docker-compose --profile redis up -d --no-deps --build
+docker-compose up -d --no-deps --build redis
 
 # start mail service
-docker-compose build --no-cache edb-server-mailer
-docker-compose --profile mailer up -d --no-deps --build
+docker-compose up -d --no-deps --build edb-server-mailer
 
 # start the server
-docker-compose build --no-cache edb-server
-docker-compose up -d --no-deps --force-recreate edb-server
+docker-compose up -d --no-deps --build edb-server
 
 # start nginx
 docker-compose up -d --no-deps --build nginx
