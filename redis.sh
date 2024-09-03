@@ -1,1 +1,1 @@
-docker-compose --profile redis up -d --no-deps --build
+docker-compose up -d --no-deps --build redis
