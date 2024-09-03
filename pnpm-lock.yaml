@@ -1,0 +1,22 @@
+lockfileVersion: '9.0'
+
+settings:
+  autoInstallPeers: true
+  excludeLinksFromLockfile: false
+
+importers:
+
+  .:
+    dependencies:
+      axios-curlirize:
+        specifier: ^2.0.0
+        version: 2.0.0
+
+packages:
+
+  axios-curlirize@2.0.0:
+    resolution: {integrity: sha512-TrQBa8MfIwaYsrCoYhfCr7NDRXLuGm+Rqh/PtAuO64b8PCCOJWn37BWQvpN4/mzzig3uHb4qXzvpxJmALHaiwA==}
+
+snapshots:
+
+  axios-curlirize@2.0.0: {}
