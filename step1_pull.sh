@@ -19,7 +19,7 @@ git clone https://github.com/antonybholmes//go-motiftogene.git
 git clone https://github.com/antonybholmes//go-gex.git
 
 pwd=`pwd`
-for d in `find . -maxdepth 1 -mindepth 1 -type d`
+for d in `find ${pwd} -maxdepth 1 -mindepth 1 -type d`
 do
 	echo ${d}
 	cd ${d}
