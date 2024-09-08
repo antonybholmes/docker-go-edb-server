@@ -49,31 +49,57 @@ services:
       dockerfile: nginx/Dockerfile
     ports:
       - 80:80
-  mysql:
-    container_name: mysql
+  postgres:
+    container_name: postgres
     profiles:
       - prod
       - dev
     build: 
       context: .
-      dockerfile: mysql/Dockerfile
+      dockerfile: postgres/Dockerfile
     env_file: 
       .env
     ports:
-      - 3306:3306
+      - 5432:5432
     volumes:
-      - ../data/mysql:/var/lib/mysql
-  phpmyadmin:
-    container_name: phpmyadmin
+      - ../data/postgres:/var/lib/postgresql/data
+  pgadmin4:
+    container_name: pgadmin4
     profiles:
       - prod
       - dev
     build: 
       context: .
-      dockerfile: phpmyadmin/Dockerfile
+      dockerfile: pgadmin4/Dockerfile
+    env_file: 
+      .env
     ports:
       - 9000:80
-    env_file: 
-      .env
-    links: 
-      - mysql:db
+  # mysql:
+  #   container_name: mysql
+  #   profiles:
+  #     - prod
+  #     - dev
+  #   build: 
+  #     context: .
+  #     dockerfile: mysql/Dockerfile
+  #   env_file: 
+  #     .env
+  #   ports:
+  #     - 3306:3306
+  #   volumes:
+  #     - ../data/mysql:/var/lib/mysql
+  # phpmyadmin:
+  #   container_name: phpmyadmin
+  #   profiles:
+  #     - prod
+  #     - dev
+  #   build: 
+  #     context: .
+  #     dockerfile: phpmyadmin/Dockerfile
+  #   ports:
+  #     - 9000:80
+  #   env_file: 
+  #     .env
+  #   links: 
+  #     - mysql:db
