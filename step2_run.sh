@@ -10,6 +10,10 @@ then
 	./create_rsa_keys.sh
 fi
 
+# start postgres
+docker-compose up -d --no-deps --build postgres
+docker-compose up -d --no-deps --build pgadmin4
+
 # start redis
 docker-compose up -d --no-deps --build redis
 
