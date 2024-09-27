@@ -15,7 +15,7 @@ ADD src/go-sys/ go-sys/
 ADD src/go-mutations/ go-mutations/
 ADD src/go-geneconv/ go-geneconv/
 ADD src/go-pathway/ go-pathway/
-ADD src/go-motiftogene/ go-motiftogene/
+ADD src/go-motifs/ go-motifs/
 ADD src/go-gex/ go-gex/
 
 # get the repositories we need
@@ -29,7 +29,7 @@ ADD src/go-gex/ go-gex/
 #	git clone https://github.com/antonybholmes//go-mutations.git && \
 #	git clone https://github.com/antonybholmes//go-geneconv.git && \
 #	git clone https://github.com/antonybholmes//go-pathway.git && \
-#	git clone https://github.com/antonybholmes//go-motiftogene.git && \
+#	git clone https://github.com/antonybholmes//go-motifs.git && \
 #	git clone https://github.com/antonybholmes//go-gex.git
 
 WORKDIR /go-edb-server
