@@ -59,6 +59,7 @@ COPY .env /
 # copy keys for signing jwts etc
 COPY jwtRS256.key /
 COPY jwtRS256.key.pub /
+COPY auth0.key.pub /
 
 # default port
 EXPOSE 8080
