@@ -9,11 +9,12 @@ then
 fi
 
 # start postgres
-#docker-compose up -d --no-deps --build postgres
-#docker-compose up -d --no-deps --build pgadmin4
-
 docker-compose up -d --no-deps --build db
-docker-compose up -d --no-deps --build phpmyadmin
+docker-compose up -d --no-deps --build pgadmin4
+
+# start mariadb
+#docker-compose up -d --no-deps --build db
+#docker-compose up -d --no-deps --build phpmyadmin
 
 # start redis
 docker-compose up -d --no-deps --build redis
