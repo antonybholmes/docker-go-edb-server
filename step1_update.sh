@@ -17,6 +17,7 @@ git clone git@github.com:antonybholmes/go-geneconv.git
 git clone git@github.com:antonybholmes/go-pathway.git
 git clone git@github.com:antonybholmes/go-motifs.git
 git clone git@github.com:antonybholmes/go-gex.git
+git clone git@github.com:antonybholmes/go-tracks.git
 
 pwd=`pwd`
 for d in `find ${pwd} -maxdepth 1 -mindepth 1 -type d`
