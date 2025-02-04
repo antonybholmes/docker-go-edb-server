@@ -5,6 +5,7 @@ mkdir -p src
 cd src
 
 git clone git@github.com:antonybholmes/go-edb-server.git
+git clone git@github.com:antonybholmes/go-edb-server-gin.git
 git clone git@github.com:antonybholmes/go-edb-server-mailer.git
 git clone git@github.com:antonybholmes/go-dna.git
 git clone git@github.com:antonybholmes/go-genes.git
