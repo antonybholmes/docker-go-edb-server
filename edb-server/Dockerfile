@@ -42,7 +42,7 @@ RUN go mod tidy
 
 # build statically so runs without dependencies
 #RUN CGO_ENABLED=1 GOOS=linux BUILD=production go build --tags "fts5" -o edb-server
-RUN GIN_MODE=release CGO_ENABLED=1 GOOS=linux BUILD=production go build --tags "fts5" -o edb-server-gin
+RUN GIN_MODE=release CGO_ENABLED=1 GOOS=linux BUILD=production go build --tags "fts5" -o edb-server
  
 
 # move app into smaller alpine image
