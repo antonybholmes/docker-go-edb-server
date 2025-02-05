@@ -5,7 +5,8 @@ FROM golang AS build-stage
 
 WORKDIR /
 
-ADD src/go-edb-server/ go-edb-server/
+#ADD src/go-edb-server/ go-edb-server/
+ADD src/go-edb-server-gin/ go-edb-server-gin/
 ADD src/go-dna/ go-dna/
 ADD src/go-genes/ go-genes/
 ADD src/go-auth/ go-auth/
@@ -17,6 +18,9 @@ ADD src/go-geneconv/ go-geneconv/
 ADD src/go-pathway/ go-pathway/
 ADD src/go-motifs/ go-motifs/
 ADD src/go-gex/ go-gex/
+ADD src/go-seqs/ go-seqs/
+ADD src/go-beds/ go-beds/
+ADD src/go-cytobands/ go-cytobands/
 
 # get the repositories we need
 #RUN git clone https://github.com/antonybholmes//go-edb-server.git && \
@@ -32,12 +36,14 @@ ADD src/go-gex/ go-gex/
 #	git clone https://github.com/antonybholmes//go-motifs.git && \
 #	git clone https://github.com/antonybholmes//go-gex.git
 
-WORKDIR /go-edb-server
+WORKDIR /go-edb-server-gin
 
 RUN go mod tidy
 
 # build statically so runs without dependencies
-RUN CGO_ENABLED=1 GOOS=linux BUILD=production go build --tags "fts5" -o edb-server
+#RUN CGO_ENABLED=1 GOOS=linux BUILD=production go build --tags "fts5" -o edb-server
+RUN GIN_MODE=release CGO_ENABLED=1 GOOS=linux BUILD=production go build --tags "fts5" -o edb-server
+ 
 
 # move app into smaller alpine image
 FROM debian AS release-stage
@@ -48,12 +54,12 @@ WORKDIR /
 # https://stackoverflow.com/questions/52969195/docker-container-running-golang-http-client-getting-error-certificate-signed-by
 COPY --from=build-stage /etc/ssl/certs/ca-certificates.crt /etc/ssl/certs/
 
-COPY --from=build-stage /go-edb-server/edb-server edb-server
+COPY --from=build-stage /go-edb-server-gin/edb-server edb-server
 
 # aux files needed by app
-COPY --from=build-stage /go-edb-server/templates/ /templates
-COPY --from=build-stage /go-edb-server/consts.env /
-COPY --from=build-stage /go-edb-server/version.env /
+COPY --from=build-stage /go-edb-server-gin/templates/ /templates
+COPY --from=build-stage /go-edb-server-gin/consts.env /
+COPY --from=build-stage /go-edb-server-gin/version.env /
 COPY .env /
 
 # copy keys for signing jwts etc
@@ -65,4 +71,4 @@ COPY auth0.key.pub /
 EXPOSE 8080
 
 # CMD ["./edb-server"]
-CMD BUILD=production ./edb-server
+CMD GIN_MODE=release BUILD=production ./edb-server
