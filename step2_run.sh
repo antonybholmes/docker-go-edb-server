@@ -8,6 +8,10 @@ then
 	./create_rsa_keys.sh
 fi
 
+set -o allexport
+source .env
+set +o allexport
+
 # start postgres
 #docker-compose up -d --no-deps --build db
 #docker-compose up -d --no-deps --build pgadmin4
@@ -17,6 +21,8 @@ docker-compose up -d --no-deps --build db
 docker-compose up -d --no-deps --build phpmyadmin
 
 # start redis
+# do some env sub so we can add password without storing it
+envsubst < redis/redis.template.conf > redis/redis.conf
 docker-compose up -d --no-deps --build redis
 
 # start mail service
