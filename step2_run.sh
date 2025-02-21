@@ -1,5 +1,5 @@
-mkdir ../data/kafka
-sudo chown 1001:1001 ../data/kafka
+#mkdir ../data/kafka
+#sudo chown 1001:1001 ../data/kafka
 
 #docker-compose down
 #docker image rm docker-rust-edb-api-web
@@ -25,10 +25,10 @@ docker-compose up -d --no-deps --build phpmyadmin
 
 # start redis
 # do some env sub so we can add password without storing it
-# envsubst < redis/redis.template.conf > redis/redis.conf
-# docker-compose up -d --no-deps --build redis
+envsubst < redis/redis.template.conf > redis/redis.conf
+docker-compose up -d --no-deps --build redis
 
-docker-compose up -d --no-deps --build kafka
+#docker-compose up -d --no-deps --build kafka
 
 # start mail service
 docker-compose up -d --no-deps --build edb-server-mailer
