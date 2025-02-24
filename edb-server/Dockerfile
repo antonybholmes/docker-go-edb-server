@@ -9,7 +9,7 @@ WORKDIR /
 ADD src/go-edb-server-gin/ go-edb-server-gin/
 ADD src/go-dna/ go-dna/
 ADD src/go-genes/ go-genes/
-ADD src/go-auth/ go-auth/
+ADD src/go-web/ go-web/
 ADD src/go-basemath/ go-basemath/
 ADD src/go-mailer/ go-mailer/
 ADD src/go-sys/ go-sys/
@@ -26,7 +26,7 @@ ADD src/go-cytobands/ go-cytobands/
 #RUN git clone https://github.com/antonybholmes//go-edb-server.git && \
 #	git clone https://github.com/antonybholmes//go-dna.git && \
 #	git clone https://github.com/antonybholmes//go-genes.git && \
-#	git clone https://github.com/antonybholmes//go-auth.git && \
+#	git clone https://github.com/antonybholmes//go-web.git && \
 #	git clone https://github.com/antonybholmes//go-basemath.git && \
 #	git clone https://github.com/antonybholmes//go-sys.git && \
 #	git clone https://github.com/antonybholmes//go-mailer.git && \
