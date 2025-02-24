@@ -9,7 +9,7 @@ git clone git@github.com:antonybholmes/go-edb-server-gin.git
 git clone git@github.com:antonybholmes/go-edb-server-mailer.git
 git clone git@github.com:antonybholmes/go-dna.git
 git clone git@github.com:antonybholmes/go-genes.git
-git clone git@github.com:antonybholmes/go-auth.git
+git clone git@github.com:antonybholmes/go-web.git
 git clone git@github.com:antonybholmes/go-basemath.git
 git clone git@github.com:antonybholmes/go-sys.git
 git clone git@github.com:antonybholmes/go-mailer.git
