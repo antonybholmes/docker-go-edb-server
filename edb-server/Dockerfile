@@ -43,7 +43,7 @@ RUN go mod tidy
 # build statically so runs without dependencies
 #RUN CGO_ENABLED=1 GOOS=linux BUILD=production go build --tags "fts5" -o edb-server
 RUN GIN_MODE=release CGO_ENABLED=1 GOOS=linux BUILD=production go build --tags "fts5" -o edb-server
- 
+
 
 # move app into smaller alpine image
 FROM debian AS release-stage
@@ -57,7 +57,7 @@ COPY --from=build-stage /etc/ssl/certs/ca-certificates.crt /etc/ssl/certs/
 COPY --from=build-stage /go-edb-server-gin/edb-server edb-server
 
 # aux files needed by app
-COPY --from=build-stage /go-edb-server-gin/templates/ /templates
+# COPY --from=build-stage /go-edb-server-gin/templates/ /templates
 COPY --from=build-stage /go-edb-server-gin/consts.env /
 COPY --from=build-stage /go-edb-server-gin/version.env /
 COPY .env /
