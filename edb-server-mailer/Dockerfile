@@ -6,7 +6,7 @@ FROM golang AS build-stage
 WORKDIR /
 
 ADD src/go-edb-server-mailer/ go-edb-server-mailer/
-ADD src/go-auth/ go-auth/
+ADD src/go-web/ go-web/
 ADD src/go-sys/ go-sys/
 ADD src/go-mailer/ go-mailer/
 
