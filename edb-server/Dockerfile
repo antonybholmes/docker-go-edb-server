@@ -8,7 +8,7 @@ WORKDIR /
 #ADD src/go-edb-server/ go-edb-server/
 ADD src/go-edb-server-gin/ go-edb-server-gin/
 ADD src/go-dna/ go-dna/
-ADD src/go-genes/ go-genes/
+ADD src/go-genome/ go-genome/
 ADD src/go-web/ go-web/
 ADD src/go-basemath/ go-basemath/
 ADD src/go-mailer/ go-mailer/
