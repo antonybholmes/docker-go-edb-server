@@ -67,6 +67,7 @@ COPY .env /
 COPY jwtRS256.key /
 COPY jwtRS256.key.pub /
 COPY auth0.key.pub /
+COPY clerk.key.pem /
 
 # default port
 EXPOSE 8080
