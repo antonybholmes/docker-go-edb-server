@@ -22,6 +22,7 @@ git clone git@github.com:antonybholmes/go-seqs.git
 git clone git@github.com:antonybholmes/go-beds.git
 git clone git@github.com:antonybholmes/go-cytobands.git
 git clone git@github.com:antonybholmes/go-hubs.git
+git clone git@github.com:antonybholmes/go-scrna.git
 
 pwd=`pwd`
 for d in `find ${pwd} -maxdepth 1 -mindepth 1 -type d`

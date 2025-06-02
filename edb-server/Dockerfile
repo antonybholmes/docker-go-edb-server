@@ -22,6 +22,7 @@ ADD src/go-seqs/ go-seqs/
 ADD src/go-beds/ go-beds/
 ADD src/go-cytobands/ go-cytobands/
 ADD src/go-hubs/ go-hubs/
+ADD src/go-scrna/ go-scrna/
 
 # get the repositories we need
 #RUN git clone https://github.com/antonybholmes//go-edb-server.git && \
