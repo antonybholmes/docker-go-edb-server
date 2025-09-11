@@ -1,0 +1,123 @@
+services:
+  redis:
+    container_name: redis
+    profiles:
+      - prod
+      - dev
+      - redis
+    build: 
+      context: .
+      dockerfile: redis/Dockerfile
+    env_file:
+      .env
+    ports:
+      - 6379:6379
+  kafka:
+    container_name: kafka
+    image: bitnami/kafka:latest
+    environment:
+      - KAFKA_CFG_NODE_ID=0
+      - KAFKA_CFG_PROCESS_ROLES=controller,broker
+      - KAFKA_CFG_LISTENERS=PLAINTEXT://:9092,CONTROLLER://:9093,EXTERNAL://:9094
+      - KAFKA_CFG_ADVERTISED_LISTENERS=PLAINTEXT://kafka:9092,EXTERNAL://localhost:9094
+      - KAFKA_CFG_LISTENER_SECURITY_PROTOCOL_MAP=CONTROLLER:PLAINTEXT,EXTERNAL:PLAINTEXT,PLAINTEXT:PLAINTEXT
+      - KAFKA_CFG_CONTROLLER_QUORUM_VOTERS=0@kafka:9093
+      - KAFKA_CFG_CONTROLLER_LISTENER_NAMES=CONTROLLER
+    volumes:
+    - ../data/kafka:/bitnami/kafka
+    ports:
+      - 9092:9092
+      - 9094:9094
+  # db:
+  #   container_name: db
+  #   profiles:
+  #     - prod
+  #     - dev
+  #   build: 
+  #     context: .
+  #     dockerfile: postgres/Dockerfile
+  #   env_file: 
+  #     .env
+  #   ports:
+  #     - 5432:5432
+  #   volumes:
+  #     - ../data/postgres:/var/lib/postgresql/data
+  # pgadmin4:
+  #   container_name: pgadmin4
+  #   profiles:
+  #     - prod
+  #     - dev
+  #   build: 
+  #     context: .
+  #     dockerfile: pgadmin4/Dockerfile
+  #   env_file: 
+  #     .env
+  #   ports:
+  #     - 9001:80
+  #   links: 
+  #     - db:db
+  db:
+    container_name: db
+    profiles:
+      - prod
+      - dev
+    build: 
+      context: .
+      dockerfile: mariadb/Dockerfile
+    env_file: 
+      .env
+    ports:
+      - 3306:3306
+    volumes:
+      - ../data/mysql:/var/lib/mysql
+  phpmyadmin:
+    container_name: phpmyadmin
+    profiles:
+      - prod
+      - dev
+    build: 
+      context: .
+      dockerfile: phpmyadmin/Dockerfile
+    ports:
+      - 9000:80
+    env_file: 
+      .env
+    links: 
+      - db:db
+  edb-server-mailer:
+    container_name: edb-server-mailer
+    profiles:
+      - mailer
+      - prod
+      - dev
+    build: 
+      context: .
+      dockerfile: edb-server-mailer/Dockerfile
+    env_file: 
+      .env
+  edb-server:
+    container_name: edb-server
+    profiles:
+      - prod
+      - dev
+    build: 
+      context: .
+      dockerfile: edb-server/Dockerfile
+    # https://vsupalov.com/docker-arg-env-variable-guide/
+    env_file: 
+      .env
+    ports:
+      - 8080:8080
+    volumes:
+      - ../data:/data
+      - ../logs:/logs
+  nginx:
+    container_name: nginx
+    profiles:
+      - prod
+      - dev
+    build: 
+      context: .
+      dockerfile: nginx/Dockerfile
+    ports:
+      - 80:80
