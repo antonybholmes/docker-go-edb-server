@@ -1,6 +1,6 @@
 msg=$1 #"Bug fixes and updates."
 type=$2
-branch="dev"
+branch=`git branch --show-current`
 
 if [[ -z "${msg}" ]]
 then
@@ -35,6 +35,8 @@ done
 
 echo "${type}: ${msg}"
 echo ${branch}
+
+#pnpm update-version
 
 # commit
 git add -A .
