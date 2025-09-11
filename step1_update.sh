@@ -6,7 +6,7 @@ cd src
 
 git clone git@github.com:antonybholmes/go-edb-server.git
 git clone git@github.com:antonybholmes/go-edb-server-gin.git
-git clone git@github.com:antonybholmes/go-edb-server-mailer.git
+git clone git@github.com:antonybholmes/go-edb-mail-server.git
 git clone git@github.com:antonybholmes/go-dna.git
 git clone git@github.com:antonybholmes/go-genome.git
 git clone git@github.com:antonybholmes/go-web.git
