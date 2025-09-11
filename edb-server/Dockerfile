@@ -11,7 +11,7 @@ ADD src/go-dna/ go-dna/
 ADD src/go-genome/ go-genome/
 ADD src/go-web/ go-web/
 ADD src/go-basemath/ go-basemath/
-ADD src/go-mailer/ go-mailer/
+ADD src/go-mailserver/ go-mailserver/
 ADD src/go-sys/ go-sys/
 ADD src/go-mutations/ go-mutations/
 ADD src/go-geneconv/ go-geneconv/
@@ -31,7 +31,7 @@ ADD src/go-scrna/ go-scrna/
 #	git clone https://github.com/antonybholmes//go-web.git && \
 #	git clone https://github.com/antonybholmes//go-basemath.git && \
 #	git clone https://github.com/antonybholmes//go-sys.git && \
-#	git clone https://github.com/antonybholmes//go-mailer.git && \
+#	git clone https://github.com/antonybholmes//go-mailserver.git && \
 #	git clone https://github.com/antonybholmes//go-mutations.git && \
 #	git clone https://github.com/antonybholmes//go-geneconv.git && \
 #	git clone https://github.com/antonybholmes//go-pathway.git && \
@@ -62,6 +62,7 @@ COPY --from=build-stage /go-edbserver-gin/edbserver edbserver
 # COPY --from=build-stage /go-edbserver-gin/templates/ /templates
 COPY --from=build-stage /go-edbserver-gin/consts.env /
 COPY --from=build-stage /go-edbserver-gin/version.env /
+
 # COPY .env /
 
 # copy keys for signing jwts etc
