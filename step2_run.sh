@@ -31,7 +31,7 @@ docker-compose up -d --no-deps --build redis
 #docker-compose up -d --no-deps --build kafka
 
 # start mail service
-docker-compose up -d --no-deps --build edb-server-mailer
+docker-compose up -d --no-deps --build edb-mail-server
 
 # start the server
 docker-compose up -d --no-deps --build edb-server

@@ -10,6 +10,8 @@ services:
       dockerfile: redis/Dockerfile
     env_file:
       - ./.prod.env
+    volumes:
+      - ./redis/redis.conf:/usr/local/etc/redis/redis.conf:ro
     ports:
       - 6379:6379
   #kafka:
