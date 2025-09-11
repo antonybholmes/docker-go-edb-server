@@ -5,23 +5,23 @@ FROM golang AS build-stage
 
 WORKDIR /
 
-ADD src/go-edb-mail-server/ go-edb-mail-server/
+ADD src/go-edbmailserver/ go-edbmailserver/
 ADD src/go-web/ go-web/
 ADD src/go-sys/ go-sys/
-ADD src/go-mailer/ go-mailer/
+ADD src/go-mailserver/ go-mailserver/
 
 # get the repositories we need
-#RUN git clone https://github.com/antonybholmes//go-edb-mail-server.git && \
+#RUN git clone https://github.com/antonybholmes//go-edbmailserver.git && \
 #	git clone https://github.com/antonybholmes//go-auth.git && \
 #	git clone https://github.com/antonybholmes//go-sys.git && \
-#	git clone https://github.com/antonybholmes//go-mailer.git
+#	git clone https://github.com/antonybholmes//go-mailserver.git
 
-WORKDIR /go-edb-mail-server
+WORKDIR /go-edbmailserver
 
 RUN go mod tidy
 
 # build statically so runs without dependencies
-RUN CGO_ENABLED=1 GOOS=linux BUILD=production go build --tags "fts5" -o edb-mail-server
+RUN CGO_ENABLED=1 GOOS=linux BUILD=production go build --tags "fts5" -o edbmailserver
 
 # move app into smaller alpine image
 FROM debian AS release-stage
@@ -32,13 +32,13 @@ WORKDIR /
 # https://stackoverflow.com/questions/52969195/docker-container-running-golang-http-client-getting-error-certificate-signed-by
 COPY --from=build-stage /etc/ssl/certs/ca-certificates.crt /etc/ssl/certs/
 
-COPY --from=build-stage /go-edb-mail-server/edb-mail-server edb-mail-server
+COPY --from=build-stage /go-edbmailserver/edbmailserver edbmailserver
 
 # aux files needed by app
-COPY --from=build-stage /go-edb-mail-server/templates/ /templates
-COPY --from=build-stage /go-edb-mail-server/consts.env /
-COPY --from=build-stage /go-edb-mail-server/version.env /
+COPY --from=build-stage /go-edbmailserver/templates/ /templates
+COPY --from=build-stage /go-edbmailserver/consts.env /
+COPY --from=build-stage /go-edbmailserver/version.env /
 
 # COPY .env /
 
-CMD BUILD=production ./edb-mail-server
+CMD BUILD=production ./edbmailserver

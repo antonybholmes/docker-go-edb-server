@@ -5,13 +5,13 @@ FROM golang AS build-stage
 
 WORKDIR /
 
-#ADD src/go-edb-server/ go-edb-server/
-ADD src/go-edb-server-gin/ go-edb-server-gin/
+#ADD src/go-edbserver/ go-edbserver/
+ADD src/go-edbserver-gin/ go-edbserver-gin/
 ADD src/go-dna/ go-dna/
 ADD src/go-genome/ go-genome/
 ADD src/go-web/ go-web/
 ADD src/go-basemath/ go-basemath/
-ADD src/go-mailer/ go-mailer/
+ADD src/go-mailserver/ go-mailserver/
 ADD src/go-sys/ go-sys/
 ADD src/go-mutations/ go-mutations/
 ADD src/go-geneconv/ go-geneconv/
@@ -25,26 +25,26 @@ ADD src/go-hubs/ go-hubs/
 ADD src/go-scrna/ go-scrna/
 
 # get the repositories we need
-#RUN git clone https://github.com/antonybholmes//go-edb-server.git && \
+#RUN git clone https://github.com/antonybholmes//go-edbserver.git && \
 #	git clone https://github.com/antonybholmes//go-dna.git && \
 #	git clone https://github.com/antonybholmes//go-genes.git && \
 #	git clone https://github.com/antonybholmes//go-web.git && \
 #	git clone https://github.com/antonybholmes//go-basemath.git && \
 #	git clone https://github.com/antonybholmes//go-sys.git && \
-#	git clone https://github.com/antonybholmes//go-mailer.git && \
+#	git clone https://github.com/antonybholmes//go-mailserver.git && \
 #	git clone https://github.com/antonybholmes//go-mutations.git && \
 #	git clone https://github.com/antonybholmes//go-geneconv.git && \
 #	git clone https://github.com/antonybholmes//go-pathway.git && \
 #	git clone https://github.com/antonybholmes//go-motifs.git && \
 #	git clone https://github.com/antonybholmes//go-gex.git
 
-WORKDIR /go-edb-server-gin
+WORKDIR /go-edbserver-gin
 
 RUN go mod tidy
 
 # build statically so runs without dependencies
-#RUN CGO_ENABLED=1 GOOS=linux BUILD=production go build --tags "fts5" -o edb-server
-RUN GIN_MODE=release CGO_ENABLED=1 GOOS=linux BUILD=production go build --tags "fts5" -o edb-server
+#RUN CGO_ENABLED=1 GOOS=linux BUILD=production go build --tags "fts5" -o edbserver
+RUN GIN_MODE=release CGO_ENABLED=1 GOOS=linux BUILD=production go build --tags "fts5" -o edbserver
 
 
 # move app into smaller alpine image
@@ -56,12 +56,13 @@ WORKDIR /
 # https://stackoverflow.com/questions/52969195/docker-container-running-golang-http-client-getting-error-certificate-signed-by
 COPY --from=build-stage /etc/ssl/certs/ca-certificates.crt /etc/ssl/certs/
 
-COPY --from=build-stage /go-edb-server-gin/edb-server edb-server
+COPY --from=build-stage /go-edbserver-gin/edbserver edbserver
 
 # aux files needed by app
-# COPY --from=build-stage /go-edb-server-gin/templates/ /templates
-COPY --from=build-stage /go-edb-server-gin/consts.env /
-COPY --from=build-stage /go-edb-server-gin/version.env /
+# COPY --from=build-stage /go-edbserver-gin/templates/ /templates
+COPY --from=build-stage /go-edbserver-gin/consts.env /
+COPY --from=build-stage /go-edbserver-gin/version.env /
+
 # COPY .env /
 
 # copy keys for signing jwts etc
@@ -73,5 +74,5 @@ COPY --from=build-stage /go-edb-server-gin/version.env /
 # default port
 EXPOSE 8080
 
-# CMD ["./edb-server"]
-CMD GIN_MODE=release BUILD=production ./edb-server
+# CMD ["./edbserver"]
+CMD GIN_MODE=release BUILD=production ./edbserver
