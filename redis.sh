@@ -1,5 +1,5 @@
 set -o allexport
-source .env
+source .prod.env
 set +o allexport
 
 envsubst < redis/redis.template.conf > redis/redis.conf
