@@ -5,13 +5,13 @@ FROM golang AS build-stage
 
 WORKDIR /
 
-#ADD src/go-edbserver/ go-edbserver/
 ADD src/go-edbserver-gin/ go-edbserver-gin/
 ADD src/go-dna/ go-dna/
 ADD src/go-genome/ go-genome/
 ADD src/go-web/ go-web/
 ADD src/go-basemath/ go-basemath/
 ADD src/go-mailserver/ go-mailserver/
+ADD src/go-edbmailserver/ go-edbmailserver/
 ADD src/go-sys/ go-sys/
 ADD src/go-mutations/ go-mutations/
 ADD src/go-geneconv/ go-geneconv/

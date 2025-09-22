@@ -20,21 +20,21 @@ set +o allexport
 #docker-compose up -d --no-deps --build pgadmin4
 
 # start mariadb
-docker-compose up -d --no-deps --build db --remove-orphans
-docker-compose up -d --no-deps --build phpmyadmin --remove-orphans
+docker-compose up -d --no-deps --build db
+docker-compose up -d --no-deps --build phpmyadmin
 
 # start redis
 # do some env sub so we can add password without storing it
 envsubst < redis/redis.template.conf > redis/redis.conf
-docker-compose up -d --no-deps --build redis --remove-orphans
+docker-compose up -d --no-deps --build redis
 
 #docker-compose up -d --no-deps --build kafka
 
 # start mail service
-docker-compose up -d --no-deps --build edb-mail-server --remove-orphans
+docker-compose up -d --no-deps --build edb-mail-server
 
 # start the server
-docker-compose up -d --no-deps --build edb-server --remove-orphans
+docker-compose up -d --no-deps --build edb-server
 
 # start nginx
-docker-compose up -d --no-deps --build nginx --remove-orphans
+docker-compose up -d --no-deps --build nginx
