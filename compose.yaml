@@ -119,6 +119,7 @@ services:
       - ./jwtRS256.key.pub:/jwtRS256.key.pub:ro
       - ./auth0.key.pub:/auth0.key.pub:ro
       - ./clerk.key.pem:/clerk.key.pem:ro
+      - ./config:/config:ro
   nginx:
     container_name: nginx
     profiles:
