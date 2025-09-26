@@ -35,8 +35,8 @@ docker-compose up -d --no-deps --build edb-mail-server
 
 # start the server
 # make config available for access rules
-mkdir config
-cp src/go-edbserver-gin/config/* config/
+#mkdir -p config
+#cp src/go-edbserver-gin/config/* config/
 docker-compose up -d --no-deps --build edb-server
 
 # start nginx
