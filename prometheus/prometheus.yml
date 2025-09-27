@@ -1,0 +1,7 @@
+global:
+  scrape_interval: 15s
+
+scrape_configs:
+  - job_name: 'edb-server'
+    static_configs:
+      - targets: ['edb-server:8080']
