@@ -27,6 +27,8 @@ docker-compose up -d --no-deps --build phpmyadmin
 # do some env sub so we can add password without storing it
 envsubst < redis/redis.template.conf > redis/redis.conf
 docker-compose up -d --no-deps --build redis
+# clear it if not being rebuilt
+docker restart redis
 
 #docker-compose up -d --no-deps --build kafka
 
@@ -47,3 +49,5 @@ docker-compose up -d --no-deps --build otel-collector
 docker-compose up -d --no-deps --build prometheus
 
 docker-compose up -d --no-deps --build grafana
+
+
