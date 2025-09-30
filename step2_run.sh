@@ -41,3 +41,9 @@ docker-compose up -d --no-deps --build edb-server
 
 # start nginx
 docker-compose up -d --no-deps --build nginx
+
+docker-compose up -d --no-deps --build otel-collector
+
+docker-compose up -d --no-deps --build prometheus
+
+docker-compose up -d --no-deps --build grafana

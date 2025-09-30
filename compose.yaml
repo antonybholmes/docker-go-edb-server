@@ -9,7 +9,7 @@ services:
       context: .
       dockerfile: redis/Dockerfile
     env_file:
-      - ./.prod.env
+      - ./.env
     volumes:
       - ./redis/redis.conf:/usr/local/etc/redis/redis.conf:ro
     ports:
@@ -67,7 +67,7 @@ services:
       context: .
       dockerfile: mariadb/Dockerfile
     env_file: 
-      - ./.prod.env
+      - ./.env
     ports:
       - 3306:3306
     volumes:
@@ -83,7 +83,7 @@ services:
     ports:
       - 9000:80
     env_file: 
-      - ./.prod.env
+      - ./.env
     links: 
       - db:db
   edb-mail-server:
@@ -96,7 +96,7 @@ services:
       context: .
       dockerfile: edb-mail-server/Dockerfile
     env_file: 
-       - ./.prod.env
+       - ./.env
     volumes:
       - ../logs:/logs
   edb-server:
@@ -109,7 +109,7 @@ services:
       dockerfile: edb-server/Dockerfile
     # https://vsupalov.com/docker-arg-env-variable-guide/
     env_file: 
-      - ./.prod.env
+      - ./.env
     ports:
       - 8080:8080
     volumes:
@@ -130,3 +130,38 @@ services:
       dockerfile: nginx/Dockerfile
     ports:
       - 80:80
+      
+  otel-collector:
+    container_name: otel
+    image: otel/opentelemetry-collector:latest
+    command: ["--config=/etc/otel-collector-config.yaml"]
+    volumes:
+      - ./otel/otel-collector-config.yaml:/etc/otel-collector-config.yaml:ro
+    ports:
+      - "4317:4317"     # OTLP gRPC receiver for traces
+      - "8889:8889"     # Prometheus metrics exporter
+      - "16686:16686"   # Jaeger UI
+    restart: always
+
+  prometheus:
+    container_name: prometheus
+    image: prom/prometheus:latest
+    volumes:
+      - ./prometheus/prometheus.yml:/etc/prometheus/prometheus.yml
+      - ../data/prometheus:/prometheus
+    ports:
+      - "9090:9090"
+    depends_on:
+      - otel-collector
+
+  grafana:
+    container_name: grafana
+    image: grafana/grafana-oss
+    environment:
+      - GF_SECURITY_ADMIN_PASSWORD=${GF_SECURITY_ADMIN_PASSWORD}
+    ports:
+      - "3000:3000"
+    depends_on:
+      - prometheus
+    volumes:
+      - ../data/grafana:/var/lib/grafana

@@ -31,3 +31,11 @@ do
 	./pull.sh ${msg}
 	cd ${pwd}
 done
+
+# for storing trace data
+
+mkdir -p ../data/grafana
+sudo chown -R 472:472 ../data/grafana
+
+mkdir -p ../data/prometheus
+sudo chown -R 65534:65534 ../data/prometheus
