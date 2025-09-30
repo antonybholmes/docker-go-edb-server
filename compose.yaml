@@ -1,17 +1,32 @@
 services:
-  redis:
-    container_name: redis
+  #redis:
+    #container_name: redis
+    #profiles:
+      #- prod
+      #- dev
+      #- redis
+    #build: 
+      #context: .
+      #dockerfile: redis/Dockerfile
+    #env_file:
+      #- ./.env
+    #volumes:
+      #- ./redis/redis.conf:/usr/local/etc/redis/redis.conf:ro
+    #ports:
+      #- 6379:6379
+  valkey:
+    container_name: valkey
     profiles:
       - prod
       - dev
-      - redis
+      - valkey
     build: 
       context: .
-      dockerfile: redis/Dockerfile
+      dockerfile: valkey/Dockerfile
     env_file:
       - ./.env
     volumes:
-      - ./redis/redis.conf:/usr/local/etc/redis/redis.conf:ro
+      - ./valkey/valkey.conf:/usr/local/etc/valkey/valkey.conf:ro
     ports:
       - 6379:6379
   #kafka:

@@ -25,10 +25,17 @@ docker-compose up -d --no-deps --build phpmyadmin
 
 # start redis
 # do some env sub so we can add password without storing it
-envsubst < redis/redis.template.conf > redis/redis.conf
-docker-compose up -d --no-deps --build redis
+#envsubst < redis/redis.template.conf > redis/redis.conf
+#docker-compose up -d --no-deps --build redis
 # clear it if not being rebuilt
-docker restart redis
+#docker restart redis
+
+# start redis
+# do some env sub so we can add password without storing it
+envsubst < valkey/valkey.template.conf > valkey/valkey.conf
+docker-compose up -d --no-deps --remove-orphans  --build valkey 
+# clear it if not being rebuilt
+docker restart valkey
 
 #docker-compose up -d --no-deps --build kafka
 
