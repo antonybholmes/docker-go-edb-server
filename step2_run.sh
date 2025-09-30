@@ -12,7 +12,7 @@ then
 fi
 
 set -o allexport
-source .prod.env
+source .env
 set +o allexport
 
 # start postgres
