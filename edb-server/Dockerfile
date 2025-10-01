@@ -48,7 +48,7 @@ RUN GIN_MODE=release CGO_ENABLED=1 GOOS=linux BUILD=production go build --tags "
 
 
 # move app into smaller alpine image
-FROM debian AS release-stage
+FROM debian:stable-slim AS release-stage
 
 WORKDIR /
 
