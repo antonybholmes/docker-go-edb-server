@@ -16,12 +16,12 @@ source .env
 set +o allexport
 
 # start postgres
-#docker-compose up -d --no-deps --build db
-#docker-compose up -d --no-deps --build pgadmin4
+docker-compose up -d --no-deps --build pg-db
+docker-compose up -d --no-deps --build pgadmin4
 
 # start mariadb
-docker-compose up -d --no-deps --build db
-docker-compose up -d --no-deps --build phpmyadmin
+#docker-compose up -d --no-deps --build db
+#docker-compose up -d --no-deps --build phpmyadmin
 
 # start redis
 # do some env sub so we can add password without storing it
