@@ -45,34 +45,37 @@ services:
     #ports:
       #- 9092:9092
       #- 9094:9094
-  # db:
-  #   container_name: db
-  #   profiles:
-  #     - prod
-  #     - dev
-  #   build: 
-  #     context: .
-  #     dockerfile: postgres/Dockerfile
-  #   env_file: 
-  #     .env
-  #   ports:
-  #     - 5432:5432
-  #   volumes:
-  #     - ../data/postgres:/var/lib/postgresql/data
-  # pgadmin4:
-  #   container_name: pgadmin4
-  #   profiles:
-  #     - prod
-  #     - dev
-  #   build: 
-  #     context: .
-  #     dockerfile: pgadmin4/Dockerfile
-  #   env_file: 
-  #     .env
-  #   ports:
-  #     - 9001:80
-  #   links: 
-  #     - db:db
+      
+  pg-db:
+    container_name: pg-db
+    profiles:
+      - prod
+      - dev
+    build: 
+      context: .
+      dockerfile: postgres/Dockerfile
+    env_file: 
+      .env
+    ports:
+      - 5432:5432
+    volumes:
+      - pg-data:/var/lib/postgresql/data
+  pgadmin4:
+    container_name: pgadmin4
+    profiles:
+      - prod
+      - dev
+    build: 
+      context: .
+      dockerfile: pgadmin4/Dockerfile
+    env_file: 
+      .env
+    ports:
+      - 5434:80
+    volumes:
+      - pgadmin-data:/var/lib/pgadmin
+    depends_on: 
+      - pg-db
   db:
     container_name: db
     profiles:
@@ -96,11 +99,11 @@ services:
       context: .
       dockerfile: phpmyadmin/Dockerfile
     ports:
-      - 9000:80
+      - 3308:80
     env_file: 
       - ./.env
-    links: 
-      - db:db
+    depends_on: 
+      - db
   edb-mail-server:
     container_name: edb-mail-server
     profiles:
@@ -113,7 +116,7 @@ services:
     env_file: 
        - ./.env
     volumes:
-      - ../logs:/logs
+      - logs:/logs
   edb-server:
     container_name: edb-server
     profiles:
@@ -129,7 +132,7 @@ services:
       - 8080:8080
     volumes:
       - ../data:/data
-      - ../logs:/logs
+      - logs:/logs
       - ./jwtRS256.key:/jwtRS256.key:ro
       - ./jwtRS256.key.pub:/jwtRS256.key.pub:ro
       - ./auth0.key.pub:/auth0.key.pub:ro
@@ -162,8 +165,8 @@ services:
     container_name: prometheus
     image: prom/prometheus:latest
     volumes:
-      - ./prometheus/prometheus.yml:/etc/prometheus/prometheus.yml
-      - ../data/prometheus:/prometheus
+      - ./prometheus/prometheus.yml:/etc/prometheus/prometheus.yml:ro
+      - prometheus-data:/prometheus
     ports:
       - "9090:9090"
     depends_on:
@@ -179,4 +182,10 @@ services:
     depends_on:
       - prometheus
     volumes:
-      - ../data/grafana:/var/lib/grafana
+      - grafana-data:/var/lib/grafana
+volumes:
+  pg-data:
+  pgadmin-data:
+  grafana-data:
+  prometheus-data:
+  logs:
