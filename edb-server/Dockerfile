@@ -1,4 +1,4 @@
-FROM golang AS build-stage
+FROM golang:1.25.3-bookworm AS build-stage
 
 # RUN apk update
 # RUN apk add -U --no-cache ca-certificates && update-ca-certificates
@@ -47,8 +47,8 @@ RUN go mod tidy
 RUN GIN_MODE=release CGO_ENABLED=1 GOOS=linux BUILD=production go build --tags "fts5" -o edbserver
 
 
-# move app into smaller alpine image
-FROM debian:stable-slim AS release-stage
+# move app into smaller alpine image using debian bookworm stable
+FROM debian:bookworm-slim AS release-stage
 
 WORKDIR /
 

@@ -151,7 +151,9 @@ services:
       
   otel-collector:
     container_name: otel
-    image: otel/opentelemetry-collector:latest
+    build: 
+      context: .
+      dockerfile: otel/Dockerfile
     command: ["--config=/etc/otel-collector-config.yaml"]
     volumes:
       - ./otel/otel-collector-config.yaml:/etc/otel-collector-config.yaml:ro
