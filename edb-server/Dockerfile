@@ -13,7 +13,7 @@ ADD src/go-basemath/ go-basemath/
 ADD src/go-mailserver/ go-mailserver/
 ADD src/go-edbmailserver/ go-edbmailserver/
 ADD src/go-sys/ go-sys/
-ADD src/go-mutations/ go-mutations/
+ADD src/go-wgs/ go-wgs/
 ADD src/go-geneconv/ go-geneconv/
 ADD src/go-pathway/ go-pathway/
 ADD src/go-motifs/ go-motifs/
