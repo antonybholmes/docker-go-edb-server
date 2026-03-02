@@ -135,6 +135,8 @@ services:
       - logs:/logs
       - ./jwtRS256.key:/jwtRS256.key:ro
       - ./jwtRS256.key.pub:/jwtRS256.key.pub:ro
+      - ./jwt.es256.private.pem:/jwt.es256.private.pem:ro
+      - ./jwt.es256.public.pem:/jwt.es256.public.pem:ro
       - ./auth0.key.pub:/auth0.key.pub:ro
       - ./clerk.key.pem:/clerk.key.pem:ro
       - ./config:/config:ro
