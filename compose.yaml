@@ -125,6 +125,9 @@ services:
     build: 
       context: .
       dockerfile: edb-server/Dockerfile
+    environment:
+      APP_ENV: production
+      DEBUG: "false"
     # https://vsupalov.com/docker-arg-env-variable-guide/
     env_file: 
       - ./.env
