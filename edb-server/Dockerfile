@@ -1,4 +1,4 @@
-FROM golang:1.25.3-bookworm AS build-stage
+FROM golang:1.26-bookworm AS build-stage
 
 # RUN apk update
 # RUN apk add -U --no-cache ca-certificates && update-ca-certificates
