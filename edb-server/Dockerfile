@@ -48,7 +48,7 @@ RUN GIN_MODE=release CGO_ENABLED=1 GOOS=linux BUILD=production go build --tags "
 
 
 # move app into smaller alpine image using debian bookworm stable
-FROM debian:bookworm-slim AS release-stage
+FROM debian:trixie-slim AS release-stage
 
 WORKDIR /
 
