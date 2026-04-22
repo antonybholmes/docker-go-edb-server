@@ -24,7 +24,7 @@ RUN go mod tidy
 RUN CGO_ENABLED=1 GOOS=linux BUILD=production go build --tags "fts5" -o edbmail
 
 # move app into smaller alpine image
-FROM debian:bookworm-slim AS release-stage
+FROM debian:trixie-slim AS release-stage
 
 WORKDIR /
 
