@@ -1,26 +1,26 @@
 services:
   #redis:
-    #container_name: redis
-    #profiles:
-      #- prod
-      #- dev
-      #- redis
-    #build: 
-      #context: .
-      #dockerfile: redis/Dockerfile
-    #env_file:
-      #- ./.env
-    #volumes:
-      #- ./redis/redis.conf:/usr/local/etc/redis/redis.conf:ro
-    #ports:
-      #- 6379:6379
+  #container_name: redis
+  #profiles:
+  #- prod
+  #- dev
+  #- redis
+  #build:
+  #context: .
+  #dockerfile: redis/Dockerfile
+  #env_file:
+  #- ./.env
+  #volumes:
+  #- ./redis/redis.conf:/usr/local/etc/redis/redis.conf:ro
+  #ports:
+  #- 6379:6379
   valkey:
     container_name: valkey
     profiles:
       - prod
       - dev
       - valkey
-    build: 
+    build:
       context: .
       dockerfile: valkey/Dockerfile
     env_file:
@@ -30,32 +30,31 @@ services:
     ports:
       - 6379:6379
   #kafka:
-    #container_name: kafka
-    #image: bitnami/kafka:latest
-    #environment:
-      #- KAFKA_CFG_NODE_ID=0
-      #- KAFKA_CFG_PROCESS_ROLES=controller,broker
-      #- KAFKA_CFG_LISTENERS=PLAINTEXT://:9092,CONTROLLER://:9093,EXTERNAL://:9094
-      #- KAFKA_CFG_ADVERTISED_LISTENERS=PLAINTEXT://kafka:9092,EXTERNAL://localhost:9094
-      #- KAFKA_CFG_LISTENER_SECURITY_PROTOCOL_MAP=CONTROLLER:PLAINTEXT,EXTERNAL:PLAINTEXT,PLAINTEXT:PLAINTEXT
-      #- KAFKA_CFG_CONTROLLER_QUORUM_VOTERS=0@kafka:9093
-      #- KAFKA_CFG_CONTROLLER_LISTENER_NAMES=CONTROLLER
-    #volumes:
-    #- ../data/kafka:/bitnami/kafka
-    #ports:
-      #- 9092:9092
-      #- 9094:9094
-      
+  #container_name: kafka
+  #image: bitnami/kafka:latest
+  #environment:
+  #- KAFKA_CFG_NODE_ID=0
+  #- KAFKA_CFG_PROCESS_ROLES=controller,broker
+  #- KAFKA_CFG_LISTENERS=PLAINTEXT://:9092,CONTROLLER://:9093,EXTERNAL://:9094
+  #- KAFKA_CFG_ADVERTISED_LISTENERS=PLAINTEXT://kafka:9092,EXTERNAL://localhost:9094
+  #- KAFKA_CFG_LISTENER_SECURITY_PROTOCOL_MAP=CONTROLLER:PLAINTEXT,EXTERNAL:PLAINTEXT,PLAINTEXT:PLAINTEXT
+  #- KAFKA_CFG_CONTROLLER_QUORUM_VOTERS=0@kafka:9093
+  #- KAFKA_CFG_CONTROLLER_LISTENER_NAMES=CONTROLLER
+  #volumes:
+  #- ../data/kafka:/bitnami/kafka
+  #ports:
+  #- 9092:9092
+  #- 9094:9094
+
   pg-db:
     container_name: pg-db
     profiles:
       - prod
       - dev
-    build: 
+    build:
       context: .
       dockerfile: postgres/Dockerfile
-    env_file: 
-      .env
+    env_file: .env
     ports:
       - 5432:5432
     volumes:
@@ -65,26 +64,25 @@ services:
     profiles:
       - prod
       - dev
-    build: 
+    build:
       context: .
       dockerfile: pgadmin4/Dockerfile
-    env_file: 
-      .env
+    env_file: .env
     ports:
       - 5434:80
     volumes:
       - pgadmin-data:/var/lib/pgadmin
-    depends_on: 
+    depends_on:
       - pg-db
   db:
     container_name: db
     profiles:
       - prod
       - dev
-    build: 
+    build:
       context: .
       dockerfile: mariadb/Dockerfile
-    env_file: 
+    env_file:
       - ./.env
     ports:
       - 3306:3306
@@ -95,14 +93,14 @@ services:
     profiles:
       - prod
       - dev
-    build: 
+    build:
       context: .
       dockerfile: phpmyadmin/Dockerfile
     ports:
       - 3308:80
-    env_file: 
+    env_file:
       - ./.env
-    depends_on: 
+    depends_on:
       - db
   edb-mail-server:
     container_name: edb-mail-server
@@ -110,11 +108,11 @@ services:
       - mailer
       - prod
       - dev
-    build: 
+    build:
       context: .
       dockerfile: edb-mail-server/Dockerfile
-    env_file: 
-       - ./.env
+    env_file:
+      - ./.env
     volumes:
       - logs:/logs
   edb-server:
@@ -122,19 +120,20 @@ services:
     profiles:
       - prod
       - dev
-    build: 
+    build:
       context: .
       dockerfile: edb-server/Dockerfile
     environment:
       APP_ENV: production
       DEBUG: "false"
     # https://vsupalov.com/docker-arg-env-variable-guide/
-    env_file: 
+    env_file:
       - ./.env
       - ./consts.env
     ports:
       - 8080:8080
     volumes:
+      - ./bin:/bin:ro
       - ../data:/data
       - logs:/logs
       - ./jwtRS256.key:/jwtRS256.key:ro
@@ -149,24 +148,24 @@ services:
     profiles:
       - prod
       - dev
-    build: 
+    build:
       context: .
       dockerfile: nginx/Dockerfile
     ports:
       - 80:80
-      
+
   otel-collector:
     container_name: otel
-    build: 
+    build:
       context: .
       dockerfile: otel/Dockerfile
     command: ["--config=/etc/otel-collector-config.yaml"]
     volumes:
       - ./otel/otel-collector-config.yaml:/etc/otel-collector-config.yaml:ro
     ports:
-      - "4317:4317"     # OTLP gRPC receiver for traces
-      - "8889:8889"     # Prometheus metrics exporter
-      - "16686:16686"   # Jaeger UI
+      - "4317:4317" # OTLP gRPC receiver for traces
+      - "8889:8889" # Prometheus metrics exporter
+      - "16686:16686" # Jaeger UI
     restart: always
 
   prometheus:
