@@ -142,7 +142,7 @@ services:
       - ./jwt.es256.public.pem:/app/jwt.es256.public.pem:ro
       - ./auth0.key.pub:/app/auth0.key.pub:ro
       - ./clerk.key.pem:/app/clerk.key.pem:ro
-      - ./config:/config:ro
+      - ./config:/app/config:ro
   nginx:
     container_name: nginx
     profiles:
