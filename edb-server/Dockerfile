@@ -53,7 +53,7 @@ FROM debian:trixie-slim AS release-stage
 WORKDIR /app
 
 # copy ucsc utils into container and make executable
-COPY bin/ bin/
+COPY bin/ /app/bin/
 RUN chmod -R +x /app/bin
 
 # need to copy certs for some reason as go email doesn't work without them
