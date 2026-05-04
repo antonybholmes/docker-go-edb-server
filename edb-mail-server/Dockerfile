@@ -26,7 +26,7 @@ RUN CGO_ENABLED=1 GOOS=linux BUILD=production go build --tags "fts5" -o edbmail
 # move app into smaller alpine image
 FROM debian:trixie-slim AS release-stage
 
-WORKDIR /
+WORKDIR /app
 
 # need to copy certs for some reason as go email doesn't work without them
 # https://stackoverflow.com/questions/52969195/docker-container-running-golang-http-client-getting-error-certificate-signed-by

@@ -50,7 +50,11 @@ RUN GIN_MODE=release CGO_ENABLED=1 GOOS=linux BUILD=production go build --tags "
 # move app into smaller alpine image using debian bookworm stable
 FROM debian:trixie-slim AS release-stage
 
-WORKDIR /
+WORKDIR /app
+
+# copy ucsc utils into container and make executable
+COPY bin/ bin/
+RUN chmod -R +x /app/bin
 
 # need to copy certs for some reason as go email doesn't work without them
 # https://stackoverflow.com/questions/52969195/docker-container-running-golang-http-client-getting-error-certificate-signed-by
