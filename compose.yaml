@@ -114,7 +114,7 @@ services:
     env_file:
       - ./.env
     volumes:
-      - logs:/logs
+      - logs:/app/logs
   edb-server:
     container_name: edb-server
     profiles:
@@ -133,15 +133,15 @@ services:
     ports:
       - 8080:8080
     volumes:
-      - ./bin:/bin:ro
-      - ../data:/data
-      - logs:/logs
-      - ./jwtRS256.key:/jwtRS256.key:ro
-      - ./jwtRS256.key.pub:/jwtRS256.key.pub:ro
-      - ./jwt.es256.private.pem:/jwt.es256.private.pem:ro
-      - ./jwt.es256.public.pem:/jwt.es256.public.pem:ro
-      - ./auth0.key.pub:/auth0.key.pub:ro
-      - ./clerk.key.pem:/clerk.key.pem:ro
+      - ./bin:/app/bin:ro
+      - ../data:/app/data
+      - logs:/app/logs
+      - ./jwtRS256.key:/app/jwtRS256.key:ro
+      - ./jwtRS256.key.pub:/app/jwtRS256.key.pub:ro
+      - ./jwt.es256.private.pem:/app/jwt.es256.private.pem:ro
+      - ./jwt.es256.public.pem:/app/jwt.es256.public.pem:ro
+      - ./auth0.key.pub:/app/auth0.key.pub:ro
+      - ./clerk.key.pem:/app/clerk.key.pem:ro
       - ./config:/config:ro
   nginx:
     container_name: nginx
