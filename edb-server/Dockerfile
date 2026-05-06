@@ -66,7 +66,7 @@ COPY --from=build-stage /go-edbserver-gin/edbserver edbserver
 # aux files needed by app
 # COPY --from=build-stage /go-edbserver-gin/templates/ /templates
 # COPY --from=build-stage /go-edbserver-gin/consts.env /
-COPY --from=build-stage /go-edbserver-gin/version.json /
+COPY --from=build-stage /go-edbserver-gin/version.json version.json
 
 # COPY .env /
 
