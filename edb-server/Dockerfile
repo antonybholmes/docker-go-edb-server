@@ -38,7 +38,8 @@ ADD src/go-scrna/ go-scrna/
 #	git clone https://github.com/antonybholmes//go-motifs.git && \
 #	git clone https://github.com/antonybholmes//go-gex.git
 
-# WORKDIR /go-edbserver-gin
+# change to directory of our app to build
+WORKDIR /go-edbserver-gin
 
 RUN go mod tidy
 
