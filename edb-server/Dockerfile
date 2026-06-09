@@ -5,38 +5,44 @@ FROM golang:1.26.2-trixie AS build-stage
 
 WORKDIR /
 
-ADD src/go-edbserver-gin/ go-edbserver-gin/
-ADD src/go-dna/ go-dna/
-ADD src/go-genome/ go-genome/
-ADD src/go-web/ go-web/
-ADD src/go-basemath/ go-basemath/
-ADD src/go-mailserver/ go-mailserver/
-ADD src/go-edbmailserver/ go-edbmailserver/
-ADD src/go-sys/ go-sys/
-ADD src/go-wgs/ go-wgs/
-ADD src/go-geneconv/ go-geneconv/
-ADD src/go-pathway/ go-pathway/
-ADD src/go-motifs/ go-motifs/
-ADD src/go-gex/ go-gex/
-ADD src/go-seqs/ go-seqs/
-ADD src/go-beds/ go-beds/
-ADD src/go-cytobands/ go-cytobands/
-ADD src/go-hubs/ go-hubs/
-ADD src/go-scrna/ go-scrna/
+# ADD src/go-edbserver-gin/ go-edbserver-gin/
+# ADD src/go-dna/ go-dna/
+# ADD src/go-genome/ go-genome/
+# ADD src/go-web/ go-web/
+# ADD src/go-basemath/ go-basemath/
+# ADD src/go-mailserver/ go-mailserver/
+# ADD src/go-edbmailserver/ go-edbmailserver/
+# ADD src/go-sys/ go-sys/
+# ADD src/go-wgs/ go-wgs/
+# ADD src/go-geneconv/ go-geneconv/
+# ADD src/go-pathway/ go-pathway/
+# ADD src/go-motifs/ go-motifs/
+# ADD src/go-gex/ go-gex/
+# ADD src/go-seqs/ go-seqs/
+# ADD src/go-beds/ go-beds/
+# ADD src/go-cytobands/ go-cytobands/
+# ADD src/go-hubs/ go-hubs/
+# ADD src/go-scrna/ go-scrna/
 
 # get the repositories we need
-#RUN git clone https://github.com/antonybholmes//go-edbserver.git && \
-#	git clone https://github.com/antonybholmes//go-dna.git && \
-#	git clone https://github.com/antonybholmes//go-genes.git && \
-#	git clone https://github.com/antonybholmes//go-web.git && \
-#	git clone https://github.com/antonybholmes//go-basemath.git && \
-#	git clone https://github.com/antonybholmes//go-sys.git && \
-#	git clone https://github.com/antonybholmes//go-mailserver.git && \
-#	git clone https://github.com/antonybholmes//go-mutations.git && \
-#	git clone https://github.com/antonybholmes//go-geneconv.git && \
-#	git clone https://github.com/antonybholmes//go-pathway.git && \
-#	git clone https://github.com/antonybholmes//go-motifs.git && \
-#	git clone https://github.com/antonybholmes//go-gex.git
+RUN git clone git@github.com:antonybholmes/go-mailserver.git && \
+git clone git@github.com:antonybholmes/go-edbserver-gin.git && \
+git clone git@github.com:antonybholmes/go-edbmailserver.git && \
+git clone git@github.com:antonybholmes/go-dna.git && \
+git clone git@github.com:antonybholmes/go-genome.git && \
+git clone git@github.com:antonybholmes/go-web.git && \
+git clone git@github.com:antonybholmes/go-basemath.git && \
+git clone git@github.com:antonybholmes/go-sys.git && \
+git clone git@github.com:antonybholmes/go-wgs.git && \
+git clone git@github.com:antonybholmes/go-geneconv.git && \
+git clone git@github.com:antonybholmes/go-pathway.git && \
+git clone git@github.com:antonybholmes/go-motifs.git && \
+git clone git@github.com:antonybholmes/go-gex.git && \
+git clone git@github.com:antonybholmes/go-seqs.git && \
+git clone git@github.com:antonybholmes/go-beds.git && \
+git clone git@github.com:antonybholmes/go-cytobands.git && \
+git clone git@github.com:antonybholmes/go-hubs.git && \ 
+git clone git@github.com:antonybholmes/go-scrna.git
 
 # change to directory of our app to build
 WORKDIR /go-edbserver-gin
@@ -53,7 +59,8 @@ FROM debian:trixie-slim AS release-stage
 
 WORKDIR /app
 
-# copy ucsc utils into container and make executable
+# copy ucsc utils into bin folder and make executable to
+# get around parent os not setting executable permissions on copied files
 COPY bin/ /app/bin/
 RUN chmod -R +x /app/bin
 
