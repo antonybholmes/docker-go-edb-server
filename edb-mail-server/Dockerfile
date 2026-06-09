@@ -5,16 +5,16 @@ FROM golang:1.26.2-trixie AS build-stage
 
 WORKDIR /
 
-ADD src/go-edbmailserver/ go-edbmailserver/
-ADD src/go-web/ go-web/
-ADD src/go-sys/ go-sys/
-ADD src/go-mailserver/ go-mailserver/
+# ADD src/go-edbmailserver/ go-edbmailserver/
+# ADD src/go-web/ go-web/
+# ADD src/go-sys/ go-sys/
+# ADD src/go-mailserver/ go-mailserver/
 
 # get the repositories we need
-# RUN git clone https://github.com/antonybholmes//go-edbmailserver.git && \
-# git clone https://github.com/antonybholmes//go-auth.git && \
-# git clone https://github.com/antonybholmes//go-sys.git && \
-# git clone https://github.com/antonybholmes//go-mailserver.git
+RUN git clone git@github.com:antonybholmes/go-mailserver.git && \
+git clone git@github.com:antonybholmes/go-edbmailserver.git && \
+git clone git@github.com:antonybholmes/go-web.git && \
+git clone git@github.com:antonybholmes/go-sys.git
 
 WORKDIR /go-edbmailserver
 
