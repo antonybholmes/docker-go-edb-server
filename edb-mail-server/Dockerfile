@@ -1,3 +1,5 @@
+# syntax=docker/dockerfile:1.4
+
 FROM golang:1.26.2-trixie AS build-stage
 
 # RUN apk update
@@ -11,7 +13,8 @@ WORKDIR /
 # ADD src/go-mailserver/ go-mailserver/
 
 # get the repositories we need
-RUN git clone git@github.com:antonybholmes/go-mailserver.git && \
+RUN --mount=type=ssh \
+git clone git@github.com:antonybholmes/go-mailserver.git && \
 git clone git@github.com:antonybholmes/go-edbmailserver.git && \
 git clone git@github.com:antonybholmes/go-web.git && \
 git clone git@github.com:antonybholmes/go-sys.git

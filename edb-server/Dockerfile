@@ -1,3 +1,5 @@
+# syntax=docker/dockerfile:1.4
+
 FROM golang:1.26.2-trixie AS build-stage
 
 # RUN apk update
@@ -25,7 +27,8 @@ WORKDIR /
 # ADD src/go-scrna/ go-scrna/
 
 # get the repositories we need
-RUN git clone git@github.com:antonybholmes/go-mailserver.git && \
+RUN --mount=type=ssh \
+git clone git@github.com:antonybholmes/go-mailserver.git && \
 git clone git@github.com:antonybholmes/go-edbserver-gin.git && \
 git clone git@github.com:antonybholmes/go-edbmailserver.git && \
 git clone git@github.com:antonybholmes/go-dna.git && \
