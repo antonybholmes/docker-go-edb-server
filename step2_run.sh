@@ -42,7 +42,7 @@ docker restart valkey
 # start mail service
 docker-compose up -d --no-cache --no-deps --build edb-mail-server
 
-# start the server
+# start the server force rebuild
 # make config available for access rules
 mkdir -p config
 cp src/go-edbserver-gin/config/* config/
