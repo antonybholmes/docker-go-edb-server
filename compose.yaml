@@ -114,6 +114,7 @@ services:
     env_file:
       - ./.env
     volumes:
+      - /home/ec2-user/.ssh:/root/.ssh:ro
       - logs:/app/logs
   edb-server:
     container_name: edb-server
@@ -133,6 +134,7 @@ services:
     ports:
       - 8080:8080
     volumes:
+      - /home/ec2-user/.ssh:/root/.ssh:ro
       - ./bin:/app/bin:ro
       - ../data:/app/data
       - logs:/app/logs
