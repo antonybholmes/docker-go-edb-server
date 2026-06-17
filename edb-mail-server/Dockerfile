@@ -44,8 +44,8 @@ COPY --from=build-stage /go-edbmailserver/edbmail edbmail
 
 # aux files needed by app
 COPY --from=build-stage /go-edbmailserver/templates/ /templates
-COPY --from=build-stage /go-edbmailserver/consts.env /
-COPY --from=build-stage /go-edbmailserver/version.json /
+COPY --from=build-stage /go-edbmailserver/consts.env consts.env
+COPY --from=build-stage /go-edbmailserver/version.json version.json
 
 # COPY .env /
 
