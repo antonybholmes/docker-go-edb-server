@@ -26,6 +26,11 @@ WORKDIR /
 # ADD src/go-hubs/ go-hubs/
 # ADD src/go-scrna/ go-scrna/
 
+RUN apt-get update && apt-get install -y openssh-client
+
+RUN mkdir -p /root/.ssh && \
+    ssh-keyscan github.com >> /root/.ssh/known_hosts
+
 # get the repositories we need
 RUN --mount=type=ssh \
 git clone git@github.com:antonybholmes/go-mailserver.git && \
