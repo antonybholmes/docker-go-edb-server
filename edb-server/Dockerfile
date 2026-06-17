@@ -26,8 +26,12 @@ WORKDIR /
 # ADD src/go-hubs/ go-hubs/
 # ADD src/go-scrna/ go-scrna/
 
+# installs the SSH command-line tools:
 RUN apt-get update && apt-get install -y openssh-client
 
+# connects to GitHub’s SSH server (without logging in)
+# fetches its public host key
+# Appends that fingerprint into the trusted list known_hosts = list of servers I trust
 RUN mkdir -p /root/.ssh && \
     ssh-keyscan github.com >> /root/.ssh/known_hosts
 
