@@ -7,6 +7,11 @@ FROM golang:1.26.2-trixie AS build-stage
 
 WORKDIR /
 
+RUN apt-get update && apt-get install -y openssh-client
+
+RUN mkdir -p /root/.ssh && \
+    ssh-keyscan github.com >> /root/.ssh/known_hosts
+
 # ADD src/go-edbmailserver/ go-edbmailserver/
 # ADD src/go-web/ go-web/
 # ADD src/go-sys/ go-sys/
