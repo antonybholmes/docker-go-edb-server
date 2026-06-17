@@ -40,13 +40,13 @@ docker restart valkey
 #docker-compose up -d --no-deps --build kafka
 
 # start mail service
-docker-compose up -d --no-deps --build edb-mail-server
+docker-compose up -d --no-cache --no-deps --build edb-mail-server
 
 # start the server
 # make config available for access rules
 mkdir -p config
 cp src/go-edbserver-gin/config/* config/
-docker-compose up -d --no-deps --build edb-server
+docker-compose up -d --no-cache --no-deps --build edb-server
 
 # start nginx
 docker-compose up -d --no-deps --build nginx
