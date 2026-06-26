@@ -43,7 +43,6 @@ git clone git@github.com:antonybholmes/go-edbmailserver.git && \
 git clone git@github.com:antonybholmes/go-dna.git && \
 git clone git@github.com:antonybholmes/go-genome.git && \
 git clone git@github.com:antonybholmes/go-web.git && \
-git clone git@github.com:antonybholmes/go-basemath.git && \
 git clone git@github.com:antonybholmes/go-sys.git && \
 git clone git@github.com:antonybholmes/go-wgs.git && \
 git clone git@github.com:antonybholmes/go-geneconv.git && \
