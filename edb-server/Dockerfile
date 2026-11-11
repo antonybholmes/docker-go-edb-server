@@ -80,7 +80,7 @@ WORKDIR /app
 # get around parent os not setting executable permissions on copied files
 #COPY bin/ /app/bin/
 #RUN chmod -R +x /app/bin
-COPY --chmod=755 bin/ /app/bin
+COPY --chmod=755 bin/ /app/bin/
 
 # need to copy certs for some reason as go email doesn't work without them
 # https://stackoverflow.com/questions/52969195/docker-container-running-golang-http-client-getting-error-certificate-signed-by
