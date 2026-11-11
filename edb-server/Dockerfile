@@ -85,8 +85,8 @@ COPY --from=build-stage /go-edbserver-gin/edbserver edbserver
 # COPY --from=build-stage /go-edbserver-gin/templates/ /templates
 # COPY --from=build-stage /go-edbserver-gin/consts.env /
 COPY --from=build-stage /go-edbserver-gin/version.json version.json
-COPY --from=build-stage /go-edbserver-gin/config/access-rules.json config/access-rules.json
-COPY --from=build-stage /go-edbserver-gin/config/app.yaml config/app.yaml
+#COPY --from=build-stage /go-edbserver-gin/config/access-rules.json config/access-rules.json
+#COPY --from=build-stage /go-edbserver-gin/config/app.yaml config/app.yaml
 
 # COPY .env /
 
