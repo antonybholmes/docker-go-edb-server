@@ -138,6 +138,7 @@ services:
       - 8080:8080
     volumes:
       - ./bin:/app/bin:ro
+      - ./config:/app/config:ro
       - ../data:/app/data
       - logs:/app/logs
       - ./jwtRS256.key:/app/jwtRS256.key:ro
@@ -146,7 +147,7 @@ services:
       - ./jwt.es256.public.pem:/app/jwt.es256.public.pem:ro
       - ./auth0.key.pub:/app/auth0.key.pub:ro
       - ./clerk.key.pem:/app/clerk.key.pem:ro
-      - ./config:/app/config:ro
+
   nginx:
     container_name: nginx
     profiles:
