@@ -46,9 +46,12 @@ docker-compose up -d --no-deps edb-mail-server
 
 # start the server force rebuild
 # make config available for access rules
-mkdir -p config
-#cp src/go-edbserver-gin/config/* config/
+# mkdir -p config
+# cp src/go-edbserver-gin/config/* config/
 #docker-compose up -d --no-cache --no-deps --build edb-server
+
+# needs config/ directory with access-rules.json and app.yaml as 
+# this is mounted into the container
 docker-compose build --no-cache edb-server
 
 # Start only the specified service(s) without starting dependent services
