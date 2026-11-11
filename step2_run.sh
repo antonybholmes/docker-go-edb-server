@@ -50,6 +50,8 @@ mkdir -p config
 cp src/go-edbserver-gin/config/* config/
 #docker-compose up -d --no-cache --no-deps --build edb-server
 docker-compose build --no-cache edb-server
+
+# Start only the specified service(s) without starting dependent services
 docker-compose up -d --no-deps edb-server
 
 # start nginx
