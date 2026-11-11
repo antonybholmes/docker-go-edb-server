@@ -1,6 +1,6 @@
 # syntax=docker/dockerfile:1.4
 
-FROM golang:1.26.2-trixie AS build-stage
+FROM golang:1.24.4-trixie AS build-stage
 
 # RUN apk update
 # RUN apk add -U --no-cache ca-certificates && update-ca-certificates
