@@ -19,7 +19,7 @@ RUN mkdir -p /root/.ssh && \
 
 # get the repositories we need
 RUN --mount=type=ssh \
-git clone git@github.com:antonybholmes/go-mailserver.git && \
+git clone git@github.com:antonybholmes/go-mail.git && \
 git clone git@github.com:antonybholmes/go-edb-mailserver.git && \
 git clone git@github.com:antonybholmes/go-web.git && \
 git clone git@github.com:antonybholmes/go-sys.git
