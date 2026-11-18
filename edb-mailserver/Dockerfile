@@ -20,16 +20,16 @@ RUN mkdir -p /root/.ssh && \
 # get the repositories we need
 RUN --mount=type=ssh \
 git clone git@github.com:antonybholmes/go-mailserver.git && \
-git clone git@github.com:antonybholmes/go-edbmailserver.git && \
+git clone git@github.com:antonybholmes/go-edb-mailserver.git && \
 git clone git@github.com:antonybholmes/go-web.git && \
 git clone git@github.com:antonybholmes/go-sys.git
 
-WORKDIR /go-edbmailserver
+WORKDIR /go-edb-mailserver
 
 RUN go mod tidy
 
 # build statically so runs without dependencies
-RUN CGO_ENABLED=1 GOOS=linux BUILD=production go build --tags "fts5" -o edbmail
+RUN CGO_ENABLED=1 GOOS=linux BUILD=production go build --tags "fts5" -o edbmailserver
 
 # move app into smaller alpine image
 FROM debian:trixie-slim AS release-stage
@@ -40,13 +40,13 @@ WORKDIR /app
 # https://stackoverflow.com/questions/52969195/docker-container-running-golang-http-client-getting-error-certificate-signed-by
 COPY --from=build-stage /etc/ssl/certs/ca-certificates.crt /etc/ssl/certs/
 
-COPY --from=build-stage /go-edbmailserver/edbmail edbmail
+COPY --from=build-stage /go-edb-mailserver/edbmailserver edbmailserver
 
 # aux files needed by app
-COPY --from=build-stage /go-edbmailserver/templates/ /templates
-# COPY --from=build-stage /go-edbmailserver/consts.env consts.env
-COPY --from=build-stage /go-edbmailserver/version.json version.json
+COPY --from=build-stage /go-edb-mailserver/templates/ /templates
+# COPY --from=build-stage /go-edb-mailserver/consts.env consts.env
+COPY --from=build-stage /go-edb-mailserver/version.json version.json
 
 # COPY .env /
 
-CMD BUILD=production ./edbmail
+CMD BUILD=production ./edbmailserver

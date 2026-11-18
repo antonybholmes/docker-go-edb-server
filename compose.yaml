@@ -102,8 +102,8 @@ services:
       - ./.env
     depends_on:
       - db
-  edb-mail-server:
-    container_name: edb-mail-server
+  edb-mailserver:
+    container_name: edb-mailserver
     profiles:
       - mailer
       - prod
@@ -112,7 +112,7 @@ services:
       context: .
       ssh:
         - default
-      dockerfile: edb-mail-server/Dockerfile
+      dockerfile: edb-mailserver/Dockerfile
     env_file:
       - ./.env
     volumes:
