@@ -28,9 +28,6 @@ docker restart valkey
 #docker-compose up -d --no-cache --no-deps --build edb-mail-server
 docker restart edb-mail-server
  
-
- 
-
 # Start only the specified service(s) without starting dependent services
 docker restart edb-server
 
