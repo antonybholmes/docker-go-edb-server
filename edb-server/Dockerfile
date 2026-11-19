@@ -56,7 +56,7 @@ git clone git@github.com:antonybholmes/go-hubs.git && \
 git clone git@github.com:antonybholmes/go-scrna.git
 
 # change to directory of our app to build
-WORKDIR /go-edbserver-gin
+WORKDIR /edbserver-gin
 
 RUN go mod tidy
 
@@ -86,14 +86,14 @@ COPY --chmod=755 bin/ /app/bin/
 # https://stackoverflow.com/questions/52969195/docker-container-running-golang-http-client-getting-error-certificate-signed-by
 COPY --from=build-stage /etc/ssl/certs/ca-certificates.crt /etc/ssl/certs/
 
-COPY --from=build-stage /go-edbserver-gin/edbserver edbserver
+COPY --from=build-stage /edbserver-gin/edbserver edbserver
 
 # aux files needed by app
-# COPY --from=build-stage /go-edbserver-gin/templates/ /templates
-# COPY --from=build-stage /go-edbserver-gin/consts.env /
-COPY --from=build-stage /go-edbserver-gin/version.json version.json
-#COPY --from=build-stage /go-edbserver-gin/config/access-rules.json config/access-rules.json
-#COPY --from=build-stage /go-edbserver-gin/config/app.yaml config/app.yaml
+# COPY --from=build-stage /edbserver-gin/templates/ /templates
+# COPY --from=build-stage /edbserver-gin/consts.env /
+COPY --from=build-stage /edbserver-gin/version.json version.json
+#COPY --from=build-stage /edbserver-gin/config/access-rules.json config/access-rules.json
+#COPY --from=build-stage /edbserver-gin/config/app.yaml config/app.yaml
 
 # COPY .env /
 

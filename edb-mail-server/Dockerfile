@@ -20,11 +20,11 @@ RUN mkdir -p /root/.ssh && \
 # get the repositories we need
 RUN --mount=type=ssh \
 git clone git@github.com:antonybholmes/go-mail.git && \
-git clone git@github.com:antonybholmes/go-edb-mailserver.git && \
+git clone git@github.com:antonybholmes/go-edb-mail-server.git && \
 git clone git@github.com:antonybholmes/go-web.git && \
 git clone git@github.com:antonybholmes/go-sys.git
 
-WORKDIR /go-edb-mailserver
+WORKDIR /edb-mail-server
 
 RUN go mod tidy
 
@@ -40,12 +40,12 @@ WORKDIR /app
 # https://stackoverflow.com/questions/52969195/docker-container-running-golang-http-client-getting-error-certificate-signed-by
 COPY --from=build-stage /etc/ssl/certs/ca-certificates.crt /etc/ssl/certs/
 
-COPY --from=build-stage /go-edb-mailserver/edbmailserver edbmailserver
+COPY --from=build-stage /edb-mail-server/edbmailserver edbmailserver
 
 # aux files needed by app
-COPY --from=build-stage /go-edb-mailserver/templates/ /templates
-# COPY --from=build-stage /go-edb-mailserver/consts.env consts.env
-COPY --from=build-stage /go-edb-mailserver/version.json version.json
+COPY --from=build-stage /edb-mail-server/templates/ /templates
+# COPY --from=build-stage /edb-mail-server/consts.env consts.env
+COPY --from=build-stage /edb-mail-server/version.json version.json
 
 # COPY .env /
 
