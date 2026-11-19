@@ -43,7 +43,7 @@ COPY --from=build-stage /etc/ssl/certs/ca-certificates.crt /etc/ssl/certs/
 COPY --from=build-stage /edb-mail-server/edbmailserver edbmailserver
 
 # aux files needed by app
-COPY --from=build-stage /edb-mail-server/templates/ /templates
+COPY --from=build-stage /edb-mail-server/templates/ ./templates/
 # COPY --from=build-stage /edb-mail-server/consts.env consts.env
 COPY --from=build-stage /edb-mail-server/version.json version.json
 
