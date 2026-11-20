@@ -16,8 +16,8 @@ source .env
 set +o allexport
 
 # start postgres
-docker restart pg-db
-docker restart pgadmin4
+#docker restart pg-db
+#docker restart pgadmin4
  
 # clear it if not being rebuilt
 docker restart valkey
